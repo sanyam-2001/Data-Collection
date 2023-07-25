@@ -1,4 +1,4 @@
-const ActionMap = {
+const ActionLookup = {
     1: "SAVE_TO_GOOGLE_SHEET"
 };
-export default ActionMap;
+export default ActionLookup;

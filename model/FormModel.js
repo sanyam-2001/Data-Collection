@@ -3,7 +3,9 @@ import { QuestionSchema } from './QuestionModel'
 export const FormSchema = mongoose.Schema({
     title: String,
     questions: [QuestionSchema],
-    actionList: [Number]
+    actionList: [Number],
+    googleSheetLink: String,
+    googleSheetId: String
 });
 
 
