@@ -2,8 +2,8 @@ import { Router } from 'express';
 import FormModel from '../model/FormModel';
 import ResponseModel from '../model/ResponseModel';
 import ActionMap from '../config/ActionMap';
+import { kafkaProducer } from '../config/KafkaConfig';
 const router = Router();
-
 
 router.post("/create", async (req, res) => {
     const { title, questions } = req.body;
@@ -18,6 +18,10 @@ router.post("/create", async (req, res) => {
 router.post("/submit", async (req, res) => {
     const newResponse = new ResponseModel(req.body);
     await newResponse.save();
+    await kafkaProducer.send({
+        topic: process.env.EXECUTION_KAFKA_TOPIC,
+        messages: [{ key: newResponse._id.toString(), value: JSON.stringify(newResponse) }]
+    })
     return res.json(newResponse);
 });
 router.put("/actionList/add", async (req, res) => {
