@@ -10,7 +10,7 @@ const collectFailedActions = async (err, response, form, actionId) => {
     await newFailedAction.save();
     await kafkaProducer.send({
         topic: process.env.FAILED_ACTION_KAFKA_TOPIC,
-        messages: [{ key: newFailedAction._id, value: JSON.stringify(newFailedAction) }]
+        messages: [{ key: newFailedAction._id.toString(), value: JSON.stringify(newFailedAction) }]
     });
 }
 export default collectFailedActions;

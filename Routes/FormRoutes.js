@@ -37,5 +37,18 @@ router.put("/actionList/add", async (req, res) => {
 
 });
 
+router.put("/actionParameters/add", async (req, res) => {
+    const { formId, params } = req.body;
+    const form = await FormModel.findById(formId);
+    const updatedForm = await FormModel.findByIdAndUpdate(formId, {
+        actionParameters: {
+            ...form.actionParameters,
+            ...params
+        }
+    }, { new: true });
+
+    return res.json({ success: true, code: 200, data: updatedForm, err: null });
+})
+
 
 export default router;

@@ -3,6 +3,7 @@ dotenv.config();
 import express from 'express';
 import bootstrap from './bootstrap/Bootstrap';
 import FormRoutes from './Routes/FormRoutes';
+import FormModel from './model/FormModel';
 
 const app = express();
 const PORT = process.env.PORT || 5000;

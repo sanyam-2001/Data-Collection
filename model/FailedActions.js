@@ -7,6 +7,6 @@ export const FailedActionsSchema = mongoose.Schema({
 });
 
 
-const FailedActionsModel = new mongoose.model("failedActions", FailedActionsSchema);
+const FailedActionsModel = new mongoose.model("failedActionsModel", FailedActionsSchema);
 
 export default FailedActionsModel;

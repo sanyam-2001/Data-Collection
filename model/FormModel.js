@@ -4,8 +4,14 @@ export const FormSchema = mongoose.Schema({
     title: String,
     questions: [QuestionSchema],
     actionList: [Number],
-    googleSheetLink: String,
-    googleSheetId: String
+    // googleSheetLink: String,
+    // googleSheetId: String,
+    actionParameters: {
+        type: Object,
+        default: {
+            actionObjectCreated: true
+        }
+    }
 });
 
 
