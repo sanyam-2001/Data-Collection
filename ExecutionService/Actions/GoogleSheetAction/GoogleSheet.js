@@ -45,26 +45,19 @@ class GoogleSheet {
     }
 
     addRowsToSheet = async (spreadsheetId, values) => {
-        try {
-
-            // The range of the sheet where you want to append rows (e.g., "Sheet1!A:B")
-            const range = 'Sheet1!A:B';
+        // The range of the sheet where you want to append rows (e.g., "Sheet1!A:B")
+        const range = 'Sheet1!A:B';
 
 
-            // Append the rows to the sheet
-            const response = await this.sheets.spreadsheets.values.append({
-                spreadsheetId,
-                range,
-                valueInputOption: 'RAW',
-                resource: {
-                    values: [values]
-                },
-            });
-
-            console.log('Rows added successfully:', response.data);
-        } catch (err) {
-            console.error('Error adding rows:', err.message);
-        }
+        // Append the rows to the sheet
+        const response = await this.sheets.spreadsheets.values.append({
+            spreadsheetId,
+            range,
+            valueInputOption: 'RAW',
+            resource: {
+                values: [values]
+            },
+        });
     }
 
 
