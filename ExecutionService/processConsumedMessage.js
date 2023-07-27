@@ -14,8 +14,12 @@ const executeActions = async (actionId, consumedPayload, form) => {
 const processConsumedMessage = async (message) => {
     const consumedPayload = JSON.parse(message.value.toString());
     const form = await FormModel.findById(consumedPayload.formId);
+    if (!form) {
+        console.log("FORM ID Not Found");
+        return;
+    }
     if (consumedPayload.actionId) {
-        console.log("HERE");
+        console.log("Processing a preciously failed message");
         await executeActions(consumedPayload.actionId, consumedPayload, form);
     }
     else {

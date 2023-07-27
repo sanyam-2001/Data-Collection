@@ -4,20 +4,30 @@ import FormModel from '../model/FormModel';
 import ActionLookup from '../config/ActionMap'
 
 const processBatches = async (batch) => {
-    const subBatchesGroupedByForm = createBatches(batch.messages);
-    for (const formId of Object.keys(subBatchesGroupedByForm)) {
-        const responses = subBatchesGroupedByForm[formId];
-        const form = await FormModel.findById(formId);
-        for (const actionId of form.actionList) {
-            const result = await ActionMap[actionId](responses, form);
-            if (result) {
-                console.log(`${ActionLookup[actionId]} for Form: ${form._id} executed Batched`);
+    try {
+        const subBatchesGroupedByForm = createBatches(batch.messages);
+        for (const formId of Object.keys(subBatchesGroupedByForm)) {
+            const responses = subBatchesGroupedByForm[formId];
+            const form = await FormModel.findById(formId);
+            if (!form) {
+                console.log("FORM ID Not Found");
+                return;
             }
-            else {
-                console.log(`${ActionLookup[actionId]} for Form: ${form._id} failed Batched`);
+            for (const actionId of form.actionList) {
+                const result = await ActionMap[actionId](responses, form);
+                if (result) {
+                    console.log(`${ActionLookup[actionId]} for Form: ${form._id} executed Batched`);
+                }
+                else {
+                    console.log(`${ActionLookup[actionId]} for Form: ${form._id} failed Batched`);
+                }
             }
-        }
 
+        }
+    }
+    catch (err) {
+        console.log("ERROR While Processing Batches")
+        console.log(err);
     }
 }
 export default processBatches;

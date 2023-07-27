@@ -25,29 +25,48 @@ router.post("/submit", async (req, res) => {
     return res.json(newResponse);
 });
 router.put("/actionList/add", async (req, res) => {
-    const { formId, actionIds } = req.body;
-    const { actionList } = await FormModel.findById(formId);
-    actionIds.forEach((actionId) => {
-        if (actionList.indexOf(actionId) == -1 && ActionLookup[actionId]) {
-            actionList.push(actionId);
+    try {
+        const { formId, actionIds } = req.body;
+        const form = await FormModel.findById(formId);
+        if (!form) {
+            throw "Invalid Form ID"
         }
-    });
-    const updatedForm = await FormModel.findByIdAndUpdate(formId, { actionList }, { new: true });
-    return res.json({ success: true, code: 200, data: updatedForm, err: null });
+        const { actionList } = form;
+        actionIds.forEach((actionId) => {
+            if (actionList.indexOf(actionId) == -1 && ActionLookup[actionId]) {
+                actionList.push(actionId);
+            }
+        });
+        const updatedForm = await FormModel.findByIdAndUpdate(formId, { actionList }, { new: true });
+        return res.json({ success: true, code: 200, data: updatedForm, err: null });
+    }
+    catch (err) {
+        console.log(err);
+        return res.json({ success: false, code: 400, data: null, err: err })
+    }
 
 });
 
 router.put("/actionParameters/add", async (req, res) => {
-    const { formId, params } = req.body;
-    const form = await FormModel.findById(formId);
-    const updatedForm = await FormModel.findByIdAndUpdate(formId, {
-        actionParameters: {
-            ...form.actionParameters,
-            ...params
+    try {
+        const { formId, params } = req.body;
+        const form = await FormModel.findById(formId);
+        if (!form) {
+            throw "Invalid Form ID"
         }
-    }, { new: true });
+        const updatedForm = await FormModel.findByIdAndUpdate(formId, {
+            actionParameters: {
+                ...form.actionParameters,
+                ...params
+            }
+        }, { new: true });
 
-    return res.json({ success: true, code: 200, data: updatedForm, err: null });
+        return res.json({ success: true, code: 200, data: updatedForm, err: null });
+    }
+    catch (err) {
+        console.log(err);
+        return res.json({ success: false, code: 400, data: null, err: err })
+    }
 })
 
 
