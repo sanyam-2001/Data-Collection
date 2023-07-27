@@ -8,10 +8,10 @@ const test = async (count) => {
         const randomName = uniqueNamesGenerator({ dictionaries: [adjectives, colors, animals] });
         const companyName = uniqueNamesGenerator({ dictionaries: [adjectives, colors] });
         const data = JSON.stringify({
-            "formId": "64c0e499ce4e18e6f9caf125",
+            "formId": "64c0fb7534d98b33a66fbaf6",
             "response": [
                 randomName,
-                `${randomName}@bmail.com`,
+                `sanyambhaskar5@gmail.com`,
                 getRndInteger(18, 55),
                 companyName,
                 "Male",

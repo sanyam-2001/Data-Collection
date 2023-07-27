@@ -55,7 +55,7 @@ class GoogleSheet {
             range,
             valueInputOption: 'RAW',
             resource: {
-                values: [values]
+                values: values
             },
         });
     }

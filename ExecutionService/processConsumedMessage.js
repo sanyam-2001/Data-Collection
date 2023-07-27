@@ -2,7 +2,7 @@ import ActionLookup from '../config/ActionMap';
 import FormModel from '../model/FormModel'
 import ActionMap from './ActionMap';
 const executeActions = async (actionId, consumedPayload, form) => {
-    const result = await ActionMap[actionId](consumedPayload, form);
+    const result = await ActionMap[actionId]([consumedPayload], form);
     if (result) {
         console.log(`${ActionLookup[actionId]} for Form: ${form._id} executed`);
     }
@@ -16,11 +16,11 @@ const processConsumedMessage = async (message) => {
     const form = await FormModel.findById(consumedPayload.formId);
     if (consumedPayload.actionId) {
         console.log("HERE");
-        executeActions(consumedPayload.actionId, consumedPayload, form);
+        await executeActions(consumedPayload.actionId, consumedPayload, form);
     }
     else {
         for (const actionId of form.actionList) {
-            executeActions(actionId, consumedPayload, form);
+            await executeActions(actionId, consumedPayload, form);
         }
     }
 }
