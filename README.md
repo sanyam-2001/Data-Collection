@@ -87,7 +87,7 @@ To make it Asynchronous(As we are expecting eventual Consistency and a Fault-tol
 
 # Architecture and Workflow
 
-![Alt text]("https://drive.google.com/file/d/1YYXu_PKSZuMh77SeR0q7H2cS5L8o8Gg1/view?usp=drive_link")
+![Alt text]("https://github.com/sanyam-2001/Data-Collection/blob/master/public/Daisy-Challenge.drawio.svg")
 
 
 
