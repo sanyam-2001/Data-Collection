@@ -1,6 +1,6 @@
 
 
-# Atlan Daisy Challenge Solution
+# Data Collection Platform
 
 Steps to Set Up: 
 
@@ -19,7 +19,7 @@ Steps to Set Up:
 Postman Link: [https://elements.getpostman.com/redirect?entityId=14285336-29e20c91-1684-4e8e-becd-adb5981a4c29&entityType=collection](https://elements.getpostman.com/redirect?entityId=14285336-29e20c91-1684-4e8e-becd-adb5981a4c29&entityType=collection)
 
 
-# Problem Statement Interpretation
+# Problem Statement
 
 
 
@@ -54,9 +54,8 @@ Alternatively, We could Separate the 2 Steps(Saving and Running Actions) so that
 
 # Solution
 
-I went forward with the second solution.
 
-We have 2 Services in our solution,
+We have 2 Services,
 
 
 
